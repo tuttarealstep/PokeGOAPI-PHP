@@ -1,6 +1,8 @@
 # PokeGOAPI-PHP
 Pokemon GO PHP API library
 
+This is a conversion of this: [PokeGOAPI-Java](https://github.com/Grover-c13/PokeGOAPI-Java) in php.
+
 # Build
   - Clone the repo
   - `` git clone https://github.com/tuttarealstep/PokeGOAPI-PHP.git ``
@@ -22,7 +24,7 @@ How to use example:
   echo $PokemonGoAPI->getPlayerProfile()->getUsername() . "\n"; //Print User Username
 ```
 
-For enable debug message go to src/PokemonGoAPI/Utils/Output.php and change:
+For enable debug message go to ``src/PokemonGoAPI/Utils/Output.php`` and change:
 ```php
     public $PK_GO_DEBUG = false;
  ```
