@@ -1,0 +1,22 @@
+{
+  "name": "Tuttarealstep/PokemonGoAPI",
+  "description": "Api for pokemon go",
+  "minimum-stability": "dev",
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Stefano Valenzano"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "PokemonGoAPI\\": "src/PokemonGoAPI",
+      "POGOProtos\\": "src/POGOProtos"
+    },
+    "files": ["src/POGOProtos/protocolbuffers.inc.php"]
+  }
+}

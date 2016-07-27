@@ -22,6 +22,18 @@ How to use example:
   echo $PokemonGoAPI->getPlayerProfile()->getUsername() . "\n"; //Print User Username
 ```
 
+For enable debug message go to src/PokemonGoAPI/Utils/Output.php and change:
+```php
+    public $PK_GO_DEBUG = false;
+ ```
+
+To:
+
+```php
+    public $PK_GO_DEBUG = true;
+ ```
+
+
 ## TODO
   - Implement PTC Login
   - Finish Map Implementation
