@@ -38,8 +38,8 @@ To:
 
 ## TODO
   - Implement PTC Login
-  - Finish Map Implementation
   - Test all things
+  - Check for issues
 
 ## Credits
 - [Grover-c13](https://github.com/Grover-c13) for his java api (Beacuse I've converted his api in php and for the inspiration)

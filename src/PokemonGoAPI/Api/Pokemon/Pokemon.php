@@ -5,7 +5,7 @@
  * Time: 23.31
  */
 
-namespace pokemonGoAPI\Api\Pokemon;
+namespace PokemonGoAPI\Api\Pokemon;
 
 use POGOProtos\Data\PokemonData;
 use POGOProtos\Networking\Requests\Messages\EvolvePokemonMessage;
@@ -18,9 +18,9 @@ use POGOProtos\Networking\Responses\NicknamePokemonResponse;
 use POGOProtos\Networking\Responses\ReleasePokemonResponse;
 use POGOProtos\Networking\Responses\ReleasePokemonResponse_Result;
 use POGOProtos\Networking\Responses\UpgradePokemonResponse;
-use pokemonGoAPI\Api\Map\Pokemon\EvolutionResult;
-use pokemonGoAPI\Api\pokemonGoAPI;
-use pokemonGoAPI\Main\ServerRequest;
+use PokemonGoAPI\Api\Map\Pokemon\EvolutionResult;
+use PokemonGoAPI\Api\PokemonGoAPI;
+use PokemonGoAPI\Main\ServerRequest;
 
 class Pokemon
 {
@@ -28,7 +28,7 @@ class Pokemon
     private $pokemonData = null;
     private $pokemonMeta = null;
 
-    function __construct(pokemonGoAPI $pokemonGoAPI, PokemonData $pokemonData)
+    function __construct(PokemonGoAPI $pokemonGoAPI, PokemonData $pokemonData)
     {
         $this->pokemonGoAPI = $pokemonGoAPI;
         $this->pokemonData = $pokemonData;
