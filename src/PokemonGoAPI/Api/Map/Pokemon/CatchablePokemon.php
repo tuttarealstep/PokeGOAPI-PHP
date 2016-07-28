@@ -5,9 +5,11 @@
  * Time: 12.00
  */
 
-namespace POGOProtos\Map\Pokemon;
+namespace PokemonGoAPI\Api\Map\Pokemon;
 
 use POGOProtos\Inventory\Item\ItemId;
+use POGOProtos\Map\Pokemon\MapPokemon;
+use POGOProtos\Map\Pokemon\WildPokemon;
 use POGOProtos\Networking\Requests\Messages\CatchPokemonMessage;
 use POGOProtos\Networking\Requests\Messages\EncounterMessage;
 use POGOProtos\Networking\Requests\Messages\UseItemCaptureMessage;

@@ -133,7 +133,7 @@ namespace POGOProtos\Networking\Requests\Messages {
     public function getCellId($index) { return $this->cellId[$index]; }
     public function getCellIdArray() { return $this->cellId; }
     public function setCellId($index, array $value) {$this->cellId[$index] = $value; }
-    public function addCellId(array $value) { $this->cellId[] = $value; }
+    public function addCellId( $value) { $this->cellId[] = $value; }
     public function addAllCellId(array $values) { foreach($values as $value) {$this->cellId[] = $value; }}
 
     public function clearSinceTimestampMs() { $this->sinceTimestampMs = array(); }
@@ -141,7 +141,7 @@ namespace POGOProtos\Networking\Requests\Messages {
     public function getSinceTimestampMs($index) { return $this->sinceTimestampMs[$index]; }
     public function getSinceTimestampMsArray() { return $this->sinceTimestampMs; }
     public function setSinceTimestampMs($index, array $value) {$this->sinceTimestampMs[$index] = $value; }
-    public function addSinceTimestampMs(array $value) { $this->sinceTimestampMs[] = $value; }
+    public function addSinceTimestampMs( $value) { $this->sinceTimestampMs[] = $value; }
     public function addAllSinceTimestampMs(array $values) { foreach($values as $value) {$this->sinceTimestampMs[] = $value; }}
 
     public function clearLatitude() { $this->latitude = 0; }

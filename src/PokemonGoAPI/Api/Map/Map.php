@@ -8,7 +8,6 @@
 namespace PokemonGoAPI\Api\Map;
 
 use POGOProtos\Map\Fort\FortType;
-use POGOProtos\Map\Pokemon\CatchablePokemon;
 use POGOProtos\Networking\Requests\Messages\FortDetailsMessage;
 use POGOProtos\Networking\Requests\Messages\GetMapObjectsMessage;
 use POGOProtos\Networking\Requests\RequestType;
@@ -16,6 +15,7 @@ use POGOProtos\Networking\Responses\FortDetailsResponse;
 use POGOProtos\Networking\Responses\GetMapObjectsResponse;
 use PokemonGoAPI\Api\Gym\Gym;
 use PokemonGoAPI\Api\Map\Fort\FortDetails;
+use PokemonGoAPI\Api\Map\Pokemon\CatchablePokemon;
 use PokemonGoAPI\Api\Map\Pokemon\NearbyPokemon;
 use PokemonGoAPI\Api\PokemonGoAPI;
 use PokemonGoAPI\Google\Common\Geometry\S2Cell;
@@ -111,16 +111,16 @@ class Map
         return $points;
     }
 
-    public function getMapObjects($width = 9)
+    public function getMapObjects(int $width = 9)
     {
-        return $this->getMapObjectsCells($this->getCellIds($this->pokemonGoAPI->getAltitude(), $this->pokemonGoAPI->getLongitude(), $width), $this->pokemonGoAPI->getLatitude(), $this->pokemonGoAPI->getLongitude(), $this->pokemonGoAPI->getAltitude());
+        return $this->getMapObjectsCells($this->getCellIds($this->pokemonGoAPI->getLatitude(), $this->pokemonGoAPI->getLongitude(), $width), $this->pokemonGoAPI->getLatitude(), $this->pokemonGoAPI->getLongitude(), $this->pokemonGoAPI->getAltitude());
     }
 
     public function getMapObjectsCells($cellIds, $latitude, $longitude, $altitude)
     {
-        $this->pokemonGoAPI->setLatitude($latitude);
-        $this->pokemonGoAPI->setLongitude($longitude);
-        $this->pokemonGoAPI->setAltitude($altitude);
+        $this->pokemonGoAPI->setLatitude((float) $latitude);
+        $this->pokemonGoAPI->setLongitude((float) $longitude);
+        $this->pokemonGoAPI->setAltitude((float) $altitude);
 
 		if ($this->useCache && ($this->pokemonGoAPI->currentTimeMillis() - $this->lastMapUpdate > $this->mapObjectsExpiry)) {
             $this->lastMapUpdate = 0;
@@ -128,14 +128,14 @@ class Map
         }
 
 		$builder = new GetMapObjectsMessage();
-        $builder->setLatitude($this->pokemonGoAPI->getLatitude());
-        $builder->setLongitude($this->pokemonGoAPI->getLongitude());
+        $builder->setLatitude((float) $this->pokemonGoAPI->getLatitude());
+        $builder->setLongitude((float) $this->pokemonGoAPI->getLongitude());
 
         $index = 0;
 		foreach ($cellIds as $cellId)
         {
-            $builder->addCellId([$cellId]);
-			$builder->addSinceTimestampMs([$this->lastMapUpdate]);
+            $builder->addCellId($cellId);
+			$builder->addSinceTimestampMs($this->lastMapUpdate);
             $index++;
 		}
 
@@ -170,7 +170,7 @@ class Map
 		return $result;
     }
 
-    public function getCellIds($latitude, $longitude, $width)
+    public function getCellIds(float $latitude, float $longitude, int $width)
     {
         $latLng = S2LatLng::fromDegrees($latitude, $longitude);
         $cellId = S2CellId::fromLatLng($latLng)->parent(15);
