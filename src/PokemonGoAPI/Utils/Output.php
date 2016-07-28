@@ -75,4 +75,9 @@ class Output
         echo $this->buffer;
         $this->clearBuffer();
     }
+
+    public function setPKGODEBUG($PK_GO_DEBUG)
+    {
+        $this->PK_GO_DEBUG = $PK_GO_DEBUG;
+    }
 }

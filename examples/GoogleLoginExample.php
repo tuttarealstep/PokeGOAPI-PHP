@@ -16,7 +16,8 @@ class GoogleLoginExample
     {
         $PokemonGoAPILogin = (new \PokemonGoAPI\Auth\GoogleLogin())->login('test@gmail.com', 'password');
         $PokemonGoAPI = new PokemonGoAPI($PokemonGoAPILogin);
-        print_r($PokemonGoAPI->getPlayerProfile()->getUsername() . "\n");
+        $PokemonGoAPI->getOutput()->setPKGODEBUG(true);
+        $PokemonGoAPI->getOutput()->write($PokemonGoAPI->getPlayerProfile()->getUsername());
     }
 }
 

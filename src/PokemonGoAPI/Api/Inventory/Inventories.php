@@ -45,13 +45,17 @@ class Inventories
         $this->updateInventories(false);
     }
 
-    public function updateInventories($forceUpdate)
+    public function updateInventories($forceUpdate = false)
     {
         if($forceUpdate)
         {
             $this->lastInventoryUpdate = 0;
             $this->itemBag->reset($this->PokemonGoAPI);
             $this->pokeBank->reset($this->PokemonGoAPI);
+            $this->candyJar->reset($this->PokemonGoAPI);
+            $this->pokedex->reset($this->PokemonGoAPI);
+            $this->incubators = [];
+            $this->hatchery->reset($this->PokemonGoAPI);
         }
 
         $inventoryRequestMessage = new GetInventoryMessage();
@@ -61,8 +65,8 @@ class Inventories
 
         $response = new GetInventoryResponse($inventoryRequest->getData());
 
-        if(!empty($response->getInventoryDelta())) {
-            foreach ($response->getInventoryDelta()->getInventoryItemsArray() as $inventoryItem) {
+            foreach ($response->getInventoryDelta()->getInventoryItemsArray() as $inventoryItem)
+            {
                 $itemData = $inventoryItem->getInventoryItemData();
 
                 if (!empty($itemData->getPokemonData())) {
@@ -113,7 +117,6 @@ class Inventories
 
                 $this->lastInventoryUpdate = round(microtime(true) * 1000);
             }
-        }
     }
 
     public function getCandyJar()

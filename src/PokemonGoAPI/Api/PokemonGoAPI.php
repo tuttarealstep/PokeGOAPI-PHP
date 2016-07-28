@@ -51,6 +51,11 @@ class PokemonGoAPI
         $this->map = new Map($this);
     }
 
+    public function getMap()
+    {
+        return $this->map;
+    }
+
     public function getOutput()
     {
         return $this->output;

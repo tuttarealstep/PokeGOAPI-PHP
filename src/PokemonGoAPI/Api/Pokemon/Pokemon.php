@@ -5,7 +5,7 @@
  * Time: 23.31
  */
 
-namespace PokemonGoAPI\Api\Pokemon;
+namespace pokemonGoAPI\Api\Pokemon;
 
 use POGOProtos\Data\PokemonData;
 use POGOProtos\Networking\Requests\Messages\EvolvePokemonMessage;
@@ -18,9 +18,9 @@ use POGOProtos\Networking\Responses\NicknamePokemonResponse;
 use POGOProtos\Networking\Responses\ReleasePokemonResponse;
 use POGOProtos\Networking\Responses\ReleasePokemonResponse_Result;
 use POGOProtos\Networking\Responses\UpgradePokemonResponse;
-use PokemonGoAPI\Api\Map\Pokemon\EvolutionResult;
-use PokemonGoAPI\Api\PokemonGoAPI;
-use PokemonGoAPI\Main\ServerRequest;
+use pokemonGoAPI\Api\Map\Pokemon\EvolutionResult;
+use pokemonGoAPI\Api\pokemonGoAPI;
+use pokemonGoAPI\Main\ServerRequest;
 
 class Pokemon
 {
@@ -28,9 +28,9 @@ class Pokemon
     private $pokemonData = null;
     private $pokemonMeta = null;
 
-    function __construct(PokemonGoAPI $pokemonGoAPI, PokemonData $pokemonData)
+    function __construct(pokemonGoAPI $pokemonGoAPI, PokemonData $pokemonData)
     {
-        $this->PokemonGoAPI = $pokemonGoAPI;
+        $this->pokemonGoAPI = $pokemonGoAPI;
         $this->pokemonData = $pokemonData;
     }
 
@@ -48,7 +48,7 @@ class Pokemon
             $this->pokemonGoAPI->getInventories()->getPokebank()->removePokemon($this);
         }
 
-        $this->pokemonGoAPI->getInventories()->getPokebank()->removePokemon($this);
+        //$this->pokemonGoAPI->getInventories()->getPokebank()->removePokemon($this);
 
         $this->pokemonGoAPI->getInventories()->updateInventories();
 
@@ -67,7 +67,7 @@ class Pokemon
         $response = new NicknamePokemonResponse($serverRequest->getData());
 
         $this->pokemonGoAPI->getInventories()->getPokebank()->removePokemon($this);
-        $this->pokemonGoAPI->getInventories()->updateInventories();
+        $this->pokemonGoAPI->getInventories()->updateInventories(false);
 
         return $response->getResult();
     }
@@ -97,10 +97,10 @@ class Pokemon
 
         $response = new EvolvePokemonResponse($serverRequest->getData());
 
-        $result = new EvolutionResult($this->PokemonGoAPI, $response);
+        $result = new EvolutionResult($this->pokemonGoAPI, $response);
 
         $this->pokemonGoAPI->getInventories()->getPokebank()->removePokemon($this);
-        $this->pokemonGoAPI->getInventories()->updateInventories();
+        $this->pokemonGoAPI->getInventories()->updateInventories(false);
 
         return $result;
     }

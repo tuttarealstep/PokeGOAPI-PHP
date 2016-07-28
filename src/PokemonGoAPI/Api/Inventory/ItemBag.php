@@ -62,7 +62,7 @@ class ItemBag
         return $response->getResult();
     }
 
-    public function getItem(ItemId $id)
+    public function getItem($id)
     {
         if($id == ItemId::ITEM_UNKNOWN)
         {

@@ -48,6 +48,7 @@ class RequestHandler
 
     public function sendServerRequests(ServerRequest $request)
     {
+
         $requestEnvelope = new RequestEnvelope();
         $this->resetBuilder($requestEnvelope);
 

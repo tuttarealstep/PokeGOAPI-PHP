@@ -42,9 +42,9 @@ class PlayerProfile
 
     public function updateProfile()
     {
-        $getPlayerRequest = new ServerRequest(RequestType::GET_PLAYER);
         $getPLayerRequestMessage = new GetPlayerMessage();
-        $this->PokemonGoAPI->getRequestHandler()->sendServerRequests($getPlayerRequest, $getPLayerRequestMessage->toProtobuf());
+        $getPlayerRequest = new ServerRequest(RequestType::GET_PLAYER,$getPLayerRequestMessage);
+        $this->PokemonGoAPI->getRequestHandler()->sendServerRequests($getPlayerRequest);
 
         $playerResponse = new GetPlayerResponse($getPlayerRequest->getData());
 

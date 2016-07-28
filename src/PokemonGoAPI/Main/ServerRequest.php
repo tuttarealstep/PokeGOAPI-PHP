@@ -20,7 +20,7 @@ class ServerRequest
     {
         $requestOuterClass = new Request();
         $requestOuterClass->setRequestType($type);
-        $requestOuterClass->setRequestMessage($message);
+        $requestOuterClass->setRequestMessage($message->toProtobuf());
 
         $this->request = $requestOuterClass;
         $this->requestType = $type;

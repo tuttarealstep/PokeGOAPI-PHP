@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Map\Pokemon {
 
+  use POGOProtos\Enums\PokemonId;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;
