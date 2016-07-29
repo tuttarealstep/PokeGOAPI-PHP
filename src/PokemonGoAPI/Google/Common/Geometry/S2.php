@@ -2,6 +2,8 @@
 
 namespace PokemonGoAPI\Google\Common\Geometry;
 
+use Exception;
+
 class S2 {
     public static function IEEERemainder($dividend, $divisor) {
         return $dividend - ($divisor * round($dividend / $divisor));

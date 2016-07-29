@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Networking\Requests\Messages {
 
+  use POGOProtos\Inventory\Item\ItemId;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

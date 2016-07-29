@@ -913,4 +913,37 @@ public static boolean isValid(List
     return result;
     }
 */
+    /** Return a bounding spherical cap.
+     * @return S2Cap
+     */
+    public function getCapBound()
+    {
+        // TODO: Implement getCapBound() method.
+    }
+
+    /** Return a bounding latitude-longitude rectangle. */
+    public function getRectBound()
+    {
+        // TODO: Implement getRectBound() method.
+    }
+
+    /**
+     * If this method returns true, the region completely contains the given cell.
+     * Otherwise, either the region does not contain the cell or the containment
+     * relationship could not be determined.
+     */
+    public function contains($cell)
+    {
+        // TODO: Implement contains() method.
+    }
+
+    /**
+     * If this method returns false, the region does not intersect the given cell.
+     * Otherwise, either region intersects the cell, or the intersection
+     * relationship could not be determined.
+     */
+    public function mayIntersect(S2Cell $cell)
+    {
+        // TODO: Implement mayIntersect() method.
+    }
 }

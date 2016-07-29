@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Settings\Master\Pokemon {
 
+  use POGOProtos\Enums\PokemonMovementType;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

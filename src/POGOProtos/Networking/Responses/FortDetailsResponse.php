@@ -5,6 +5,8 @@
 
 namespace POGOProtos\Networking\Responses {
 
+  use POGOProtos\Enums\TeamColor;
+  use POGOProtos\Map\Fort\FortType;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

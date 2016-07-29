@@ -5,6 +5,8 @@
 
 namespace POGOProtos\Settings\Master {
 
+  use POGOProtos\Enums\HoloIapItemCategory;
+  use POGOProtos\Inventory\Item\ItemId;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

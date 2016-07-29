@@ -297,7 +297,7 @@ class S1Interval {
     public function expanded($radius) {
 // assert (radius >= 0);
         if ($this->isEmpty()) {
-            return this;
+            return $this;
         }
 
 // Check whether this interval will be full after expansion, allowing

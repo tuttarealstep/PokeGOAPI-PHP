@@ -5,6 +5,8 @@
 
 namespace POGOProtos\Settings\Master {
 
+  use POGOProtos\Enums\CameraInterpolation;
+  use POGOProtos\Enums\CameraTarget;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

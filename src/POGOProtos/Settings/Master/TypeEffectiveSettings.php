@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Settings\Master {
 
+  use POGOProtos\Enums\PokemonType;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

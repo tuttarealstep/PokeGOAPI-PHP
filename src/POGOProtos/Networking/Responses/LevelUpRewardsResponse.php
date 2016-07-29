@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Networking\Responses {
 
+  use POGOProtos\Inventory\Item\ItemId;
   use Protobuf;
   use ProtobufEnum;
   use ProtobufIO;

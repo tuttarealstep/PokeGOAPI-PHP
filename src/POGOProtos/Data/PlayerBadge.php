@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Data {
 
+  use POGOProtos\Enums\BadgeType;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

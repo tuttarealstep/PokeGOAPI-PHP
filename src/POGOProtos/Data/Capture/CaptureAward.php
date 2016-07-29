@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Data\Capture {
 
+  use POGOProtos\Enums\ActivityType;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

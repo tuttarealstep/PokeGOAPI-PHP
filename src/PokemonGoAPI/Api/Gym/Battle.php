@@ -83,7 +83,7 @@ class Battle
         {
             $action = new BattleAction();
             $action->setType(BattleActionType::ACTION_ATTACK);
-            $action->setActionStartMs(api.currentTimeMillis() + (100 * times));
+            $action->setActionStartMs($this->pokemonGoAPI->currentTimeMillis() + (100 * $times));
             $action->setDurationMs(500);
             $action->setTargetIndex(-1);
             $actions[] = $action;

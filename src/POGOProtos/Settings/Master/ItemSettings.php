@@ -5,6 +5,9 @@
 
 namespace POGOProtos\Settings\Master {
 
+  use POGOProtos\Enums\ItemCategory;
+  use POGOProtos\Inventory\Item\ItemId;
+  use POGOProtos\Inventory\Item\ItemType;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

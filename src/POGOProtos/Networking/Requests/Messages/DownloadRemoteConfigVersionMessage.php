@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Networking\Requests\Messages {
 
+  use POGOProtos\Enums\Platform;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

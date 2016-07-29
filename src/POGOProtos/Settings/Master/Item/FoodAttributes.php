@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Settings\Master\Item {
 
+  use POGOProtos\Enums\ItemEffect;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

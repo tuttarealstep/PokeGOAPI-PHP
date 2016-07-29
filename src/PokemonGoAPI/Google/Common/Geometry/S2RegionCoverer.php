@@ -2,6 +2,9 @@
 
 namespace PokemonGoAPI\Google\Common\Geometry;
 
+use Exception;
+use SplPriorityQueue;
+
 class S2RegionCoverer {
     /**
      * By default, the covering uses at most 8 cells at any level. This gives a

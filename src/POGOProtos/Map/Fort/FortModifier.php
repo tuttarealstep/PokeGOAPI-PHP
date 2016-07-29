@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Map\Fort {
 
+  use POGOProtos\Inventory\Item\ItemId;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

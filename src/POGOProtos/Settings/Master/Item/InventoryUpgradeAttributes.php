@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Settings\Master\Item {
 
+  use POGOProtos\Inventory\InventoryUpgradeType;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

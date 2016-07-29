@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Networking\Requests\Messages {
 
+  use POGOProtos\Enums\BadgeType;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;

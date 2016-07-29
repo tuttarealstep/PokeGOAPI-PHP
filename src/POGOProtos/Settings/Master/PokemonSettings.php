@@ -5,7 +5,11 @@
 
 namespace POGOProtos\Settings\Master {
 
+  use POGOProtos\Enums\PokemonFamilyId;
   use POGOProtos\Enums\PokemonId;
+  use POGOProtos\Enums\PokemonMove;
+  use POGOProtos\Enums\PokemonRarity;
+  use POGOProtos\Enums\PokemonType;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;
