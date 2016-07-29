@@ -18,11 +18,19 @@ class Pokeball
     const ULTRABALL = ItemId::ITEM_ULTRA_BALL;
     const MASTERBALL = ItemId::ITEM_MASTER_BALL;
 
+    /**
+     * Pokeball constructor.
+     * @param $type
+     */
     function __construct($type)
     {
         $this->ballType = $type;
     }
 
+    /**
+     * Return the pokeball type
+     * @return null
+     */
     public function getBallType()
     {
         return $this->ballType;

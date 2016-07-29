@@ -111,7 +111,7 @@ class Map
         return $points;
     }
 
-    public function getMapObjects(int $width = 9)
+    public function getMapObjects($width = 9)
     {
         return $this->getMapObjectsCells($this->getCellIds($this->pokemonGoAPI->getLatitude(), $this->pokemonGoAPI->getLongitude(), $width), $this->pokemonGoAPI->getLatitude(), $this->pokemonGoAPI->getLongitude(), $this->pokemonGoAPI->getAltitude());
     }
@@ -170,7 +170,7 @@ class Map
 		return $result;
     }
 
-    public function getCellIds(float $latitude, float $longitude, int $width)
+    public function getCellIds( $latitude, $longitude, $width)
     {
         $latLng = S2LatLng::fromDegrees($latitude, $longitude);
         $cellId = S2CellId::fromLatLng($latLng)->parent(15);

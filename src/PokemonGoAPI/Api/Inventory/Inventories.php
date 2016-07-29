@@ -31,6 +31,10 @@ class Inventories
 
     private $lastInventoryUpdate = 0;
 
+    /**
+     * Inventories constructor.
+     * @param PokemonGoAPI $PokemonGoAPI
+     */
     function __construct(PokemonGoAPI $PokemonGoAPI)
     {
         $this->PokemonGoAPI = $PokemonGoAPI;
@@ -45,6 +49,13 @@ class Inventories
         $this->updateInventories(false);
     }
 
+    /**
+     * Function for upgrade the inventory
+     *
+     * if $forceUpdate = true it reset all inventory containers
+     *
+     * @param bool $forceUpdate
+     */
     public function updateInventories($forceUpdate = false)
     {
         if($forceUpdate)
@@ -119,31 +130,63 @@ class Inventories
             }
     }
 
+    /**
+     * Return the Candy Jar with all pokemon candy
+     *
+     * @return null|CandyJar
+     */
     public function getCandyJar()
     {
         return $this->candyJar;
     }
 
+    /**
+     * Return the Hatchery
+     *
+     * @return null|Hatchery
+     */
     public function getHatchery()
     {
         return $this->hatchery;
     }
 
+    /**
+     * Return all incubators
+     *
+     * @return array|null
+     */
     public function getIncubators()
     {
         return $this->incubators;
     }
 
+    /**
+     * Return the item bag
+     * with all items
+     *
+     * @return null|ItemBag
+     */
     public function getItemBag()
     {
         return $this->itemBag;
     }
 
+    /**
+     * Return the poke bank
+     * with all pokemon
+     *
+     * @return null|PokeBank
+     */
     public function getPokeBank()
     {
         return $this->pokeBank;
     }
 
+    /**
+     * Return the user pokedex
+     *
+     * @return null|Pokedex
+     */
     public function getPokedex()
     {
         return $this->pokedex;

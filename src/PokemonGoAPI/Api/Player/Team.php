@@ -17,6 +17,10 @@ class Team
     private $value;
     private $teamName;
 
+    /**
+     * Team constructor.
+     * @param $value
+     */
     function __construct($value)
     {
         $this->value = $value;
@@ -38,11 +42,21 @@ class Team
         }
     }
 
+    /**
+     * Return the team number
+     *
+     * @return mixed
+     */
     public function getValue()
     {
         return $this->value;
     }
 
+    /**
+     * Return the team name
+     *
+     * @return string
+     */
     public function getTeamName()
     {
         return $this->teamName;

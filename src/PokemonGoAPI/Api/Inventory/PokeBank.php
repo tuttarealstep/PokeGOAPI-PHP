@@ -16,17 +16,30 @@ class PokeBank
 
     public $pokemons = [];
 
+    /**
+     * PokeBank constructor.
+     * @param PokemonGoAPI $PokemonGoAPI
+     */
     function __construct(PokemonGoAPI $PokemonGoAPI)
     {
         $this->reset($PokemonGoAPI);
     }
 
+    /**
+     * Reset the PokeBank
+     * @param PokemonGoAPI $PokemonGoAPI
+     */
     function reset(PokemonGoAPI $PokemonGoAPI)
     {
         $this->PokemonGoAPI = $PokemonGoAPI;
         $this->pokemons = [];
     }
 
+    /**
+     * Add a new pokemon
+     *
+     * @param Pokemon $pokemon
+     */
     public function addPokemon(Pokemon $pokemon)
     {
         $alreadyAdded = array_filter($this->pokemons, function($testPokemon) use ($pokemon)
@@ -40,6 +53,12 @@ class PokeBank
         }
     }
 
+    /**
+     * Search a pokemon by its pokemonid
+     *
+     * @param $id
+     * @return array
+     */
     public function getPokemonByPokemonId($id)
     {
        return array_filter($this->pokemons, function($testPokemon) use ($id)
@@ -53,6 +72,12 @@ class PokeBank
         });
     }
 
+    /**
+     * Remove pokemon
+     *
+     * @param $pokemon
+     * @return array
+     */
     public function removePokemon($pokemon)
     {
         return array_filter($this->pokemons, function($testPokemon) use ($pokemon)
@@ -66,6 +91,12 @@ class PokeBank
         });
     }
 
+    /**
+     * Return a pokemon by its id
+     *
+     * @param $id
+     * @return null
+     */
     public function getPokemonById($id)
     {
         foreach($this->pokemons as $pokemon)

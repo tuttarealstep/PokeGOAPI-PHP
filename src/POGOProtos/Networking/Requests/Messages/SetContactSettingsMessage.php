@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Networking\Requests\Messages {
 
+  use POGOProtos\Data\Player\ContactSettings;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;
@@ -35,7 +36,7 @@ namespace POGOProtos\Networking\Requests\Messages {
             $len = Protobuf::read_varint($fp, $limit);
             if ($len === false) throw new \Exception('Protobuf::read_varint returned false');
             $limit -= $len;
-            $this->contactSettings = new \POGOProtos\Data\Player\ContactSettings($fp, $len);
+            $this->contactSettings = new ContactSettings($fp, $len);
             if ($len !== 0) throw new \Exception('new \POGOProtos\Data\Player\ContactSettings did not read the full length');
 
             break;
@@ -64,7 +65,7 @@ namespace POGOProtos\Networking\Requests\Messages {
 
     public function clearContactSettings() { $this->contactSettings = null; }
     public function getContactSettings() { return $this->contactSettings;}
-    public function setContactSettings(\POGOProtos\Data\Player\ContactSettings $value) { $this->contactSettings = $value; }
+    public function setContactSettings(ContactSettings $value) { $this->contactSettings = $value; }
 
     public function __toString() {
       return ''

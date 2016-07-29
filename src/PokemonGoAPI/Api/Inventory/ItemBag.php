@@ -21,22 +21,44 @@ class ItemBag
     private $PokemonGoAPI = null;
     private $items = null;
 
+    /**
+     * ItemBag constructor.
+     * @param PokemonGoAPI $PokemonGoAPI
+     */
     function __construct(PokemonGoAPI $PokemonGoAPI)
     {
         $this->reset($PokemonGoAPI);
     }
 
+    /**
+     * Reset the item bag
+     *
+     * @param PokemonGoAPI $PokemonGoAPI
+     */
     public function reset(PokemonGoAPI $PokemonGoAPI)
     {
         $this->PokemonGoAPI = $PokemonGoAPI;
         $this->items = [];
     }
 
+    /**
+     * Function to add item in the item bag
+     *
+     * @param Item $item
+     */
     public function addItem(Item $item)
     {
         $this->items[$item->getItemId()] = $item;
     }
 
+    /**
+     * FUnction for remove item from the item bag
+     *
+     * @param ItemId $id
+     * @param $quantity
+     * @return int
+     * @throws \Exception
+     */
     public function removeItem(ItemId $id, $quantity)
     {
         $item = $this->getItem($id);
@@ -62,6 +84,13 @@ class ItemBag
         return $response->getResult();
     }
 
+    /**
+     * Function for return the selected item by pass the item id
+     *
+     * @param $id
+     * @return Item
+     * @throws \Exception
+     */
     public function getItem($id)
     {
         if($id == ItemId::ITEM_UNKNOWN)
@@ -80,6 +109,11 @@ class ItemBag
         return $this->items[$id];
     }
 
+    /**
+     * Return all items
+     *
+     * @return null
+     */
     public function getItems()
     {
         return $this->items;

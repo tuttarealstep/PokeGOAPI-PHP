@@ -5,6 +5,7 @@
 
 namespace POGOProtos\Networking\Responses {
 
+  use POGOProtos\Data\DownloadUrlEntry;
   use Protobuf;
   use ProtobufIO;
   use ProtobufMessage;
@@ -35,7 +36,7 @@ namespace POGOProtos\Networking\Responses {
             $len = Protobuf::read_varint($fp, $limit);
             if ($len === false) throw new \Exception('Protobuf::read_varint returned false');
             $limit -= $len;
-            $this->downloadUrls[] = new \POGOProtos\Data\DownloadUrlEntry($fp, $len);
+            $this->downloadUrls[] = new DownloadUrlEntry($fp, $len);
             if ($len !== 0) throw new \Exception('new \POGOProtos\Data\DownloadUrlEntry did not read the full length');
 
             break;

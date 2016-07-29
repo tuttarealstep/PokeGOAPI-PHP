@@ -12,6 +12,11 @@ use POGOProtos\Enums\PokemonId;
 
 class PokemonMetaRegistry
 {
+    /**
+     * All pokemon family
+     *
+     * @var array
+     */
     private static $familys = [
         PokemonFamilyId::FAMILY_BULBASAUR => [
             PokemonId::BULBASAUR,
@@ -565,6 +570,9 @@ class PokemonMetaRegistry
 
     private static $meta = [];
 
+    /**
+     * Function for add all pokemon meta into the $meta array
+     */
     static function populateMeta()
     {
         self::$meta = [
@@ -1002,17 +1010,35 @@ class PokemonMetaRegistry
         ];
     }
 
+    /**
+     * Return a family by id
+     *
+     * @param $id
+     * @return mixed
+     */
     public static function getFamily($id)
     {
         return self::$familys[$id];
     }
 
+    /**
+     * Return a pokemon meta
+     *
+     * @param $id
+     * @return mixed
+     */
     public static function getMeta($id)
     {
         self::populateMeta();
         return self::$meta[$id];
     }
 
+    /**
+     * Get the highest pokemon for his family
+     *
+     * @param $family
+     * @return mixed
+     */
     public static function getHightestForFamily($family)
     {
         return self::$highestForFamily[$family];

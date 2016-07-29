@@ -24,6 +24,11 @@ class GoogleLogin extends Login
 
     private $oauthClient = null;
 
+    /**
+     * GoogleLogin constructor.
+     *
+     * Setup for client request
+     */
     function __construct()
     {
         $this->setOutput(new Output());
@@ -36,6 +41,13 @@ class GoogleLogin extends Login
         );
     }
 
+    /**
+     * You pass username and password and it return the user token
+     *
+     * @param $username
+     * @param $password
+     * @return array|bool
+     */
     public function login($username, $password)
     {
         $this->getOutput()->write("Initialize Google Login", false, $this->getOutput()->INFO);

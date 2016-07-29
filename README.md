@@ -35,6 +35,8 @@ To:
     public $PK_GO_DEBUG = true;
  ```
 
+## LINKS
+  - [Examples](https://github.com/tuttarealstep/PokeGOAPI-PHP/tree/master/examples)
 
 ## TODO
   - Implement PTC Login

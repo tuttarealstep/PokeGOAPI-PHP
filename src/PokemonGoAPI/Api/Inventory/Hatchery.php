@@ -25,18 +25,30 @@ class Hatchery
         $this->reset($PokemonGoAPI);
     }
 
+    /**
+     * Reset the Hatchery
+     *
+     * @param PokemonGoAPI $pokemonGoAPI
+     */
     public function reset(PokemonGoAPI $pokemonGoAPI)
     {
         $this->PokemonGoAPI = $pokemonGoAPI;
         $this->eggs = [];
     }
 
+    /**
+     * Add a new egg into the Hatchery
+     * @param EggPokemon $egg
+     */
     public function addEgg(EggPokemon $egg)
     {
         $egg->setPokemonGoAPI($this->PokemonGoAPI);
         $this->eggs[] = $egg;
     }
 
+    /**
+     * @return array
+     */
     public function queryHatchedEggs()
     {
         $msg = new GetHatchedEggsMessage();

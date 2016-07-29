@@ -27,6 +27,14 @@ class RequestHandler
 
     private $lastAuthTicket = null;
 
+    /**
+     * The constructor require an instance of PokemonGoAPI for print etc
+     * The $userAuthToken variable is used for retrieve response and send request
+     *
+     * RequestHandler constructor.
+     * @param PokemonGoAPI $PokemonGoAPI
+     * @param $userAuthToken
+     */
     function __construct(PokemonGoAPI $PokemonGoAPI, $userAuthToken)
     {
         $this->PokemonGoAPI = $PokemonGoAPI;
@@ -36,16 +44,31 @@ class RequestHandler
         $this->requestId = rand(100000000, 999999999);
     }
 
+    /**
+     * Return the next request id
+     *
+     * @return int
+     */
     private function nextRequestId()
     {
         return $this->requestId++;
     }
 
+    /**
+     * Return the current request id
+     *
+     * @return int
+     */
     public function getRequestId()
     {
         return $this->requestId;
     }
 
+    /**
+     * Function for handle and build request to send to their servers
+     *
+     * @param ServerRequest $request
+     */
     public function sendServerRequests(ServerRequest $request)
     {
 
@@ -99,6 +122,11 @@ class RequestHandler
     }
 
 
+    /**
+     * Is a setup for the request
+     *
+     * @param RequestEnvelope $requestEnvelope
+     */
     private function resetBuilder(RequestEnvelope &$requestEnvelope)
     {
         $requestEnvelope->setStatusCode(2);

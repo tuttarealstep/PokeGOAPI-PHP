@@ -15,22 +15,43 @@ class CandyJar
     private $PokemonGoAPI = null;
     private $candies = null;
 
+    /**
+     * CandyJar constructor.
+     * @param PokemonGoAPI $PokemonGoAPI
+     */
     function __construct(PokemonGoAPI $PokemonGoAPI)
     {
         $this->reset($PokemonGoAPI);
     }
 
+    /**
+     * Reset the CandyJar
+     *
+     * @param PokemonGoAPI $pokemonGoAPI
+     */
     function reset(PokemonGoAPI $pokemonGoAPI)
     {
         $this->PokemonGoAPI = $pokemonGoAPI;
         $this->candies = [];
     }
 
+    /**
+     * Add a new candy
+     *
+     * @param $family
+     * @param $candies
+     */
     public function setCandy($family, $candies)
     {
         $this->candies[$family] = $candies;
     }
 
+    /**
+     * Add a candy
+     *
+     * @param $family
+     * @param $amount
+     */
     public function addCandy($family, $amount)
     {
         if (array_key_exists($family, $this->candies)) {
@@ -40,6 +61,12 @@ class CandyJar
         }
     }
 
+    /**
+     * Remove a candy
+     *
+     * @param $family
+     * @param $amount
+     */
     public function removeCandy($family, $amount)
     {
         if (array_key_exists($family, $this->candies)) {
@@ -53,7 +80,12 @@ class CandyJar
         }
     }
 
-
+    /**
+     * Return all candies
+     *
+     * @param $family
+     * @return int
+     */
     public function getCandies($family)
     {
         if (array_key_exists($family, $this->candies)) {
