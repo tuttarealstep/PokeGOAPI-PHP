@@ -76,7 +76,7 @@ class CatchablePokemon
     public function encounterPokemon()
     {
 
-        $reqMsg =new EncounterMessage();
+        $reqMsg = new EncounterMessage();
         $reqMsg->setEncounterId($this->getEncounterId());
         $reqMsg->setPlayerLatitude($this->pokemonGoAPI->getLatitude());
         $reqMsg->setPlayerLongitude($this->pokemonGoAPI->getLongitude());
@@ -84,6 +84,7 @@ class CatchablePokemon
 
 		$serverRequest = new ServerRequest(RequestType::ENCOUNTER, $reqMsg);
 		$this->pokemonGoAPI->getRequestHandler()->sendServerRequests($serverRequest);
+
         $response = new EncounterResponse($serverRequest->getData());
 
 		$this->encountered = $response->getStatus() == EncounterResponse_Status::ENCOUNTER_SUCCESS;
@@ -209,7 +210,8 @@ class CatchablePokemon
         $reqMsg->setItemId($item);
 
 		$serverRequest = new ServerRequest(RequestType::USE_ITEM_CAPTURE, $reqMsg);
-        $this->pokemonGoAPI->getRequestHandler()->sendServerRequests($serverRequest->getData());
+
+        $this->pokemonGoAPI->getRequestHandler()->sendServerRequests($serverRequest);
 
         $response = new UseItemCaptureResponse($serverRequest->getData());
 

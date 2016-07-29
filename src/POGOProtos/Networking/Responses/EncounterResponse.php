@@ -125,7 +125,7 @@ namespace POGOProtos\Networking\Responses {
             if ($len === false) throw new \Exception('Protobuf::read_varint returned false');
             $limit -= $len;
             $this->captureProbability = new \POGOProtos\Data\Capture\CaptureProbability($fp, $len);
-            if ($len !== 0) throw new \Exception('new \POGOProtos\Data\Capture\CaptureProbability did not read the full length');
+            //if ($len !== 0) throw new \Exception('new \POGOProtos\Data\Capture\CaptureProbability did not read the full length');
 
             break;
           default:

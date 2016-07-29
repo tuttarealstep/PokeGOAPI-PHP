@@ -5,7 +5,7 @@
  * Time: 12.53
  */
 
-namespace POGOProtos\Map\Pokemon;
+namespace PokemonGoAPI\Api\Map\Pokemon;
 
 use POGOProtos\Networking\Responses\CatchPokemonResponse;
 use POGOProtos\Networking\Responses\CatchPokemonResponse_CatchStatus;
