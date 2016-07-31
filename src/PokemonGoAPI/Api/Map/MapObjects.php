@@ -7,6 +7,8 @@
 
 namespace PokemonGoAPI\Api\Map;
 
+use PokemonGoAPI\Api\Map\Fort\Pokestop;
+
 class MapObjects
 {
     private $pokemonGoAPI;
@@ -121,7 +123,11 @@ class MapObjects
         }
 
         $this->complete = true;
-        $this->pokestops = $pokestops;
+
+        foreach($pokestops as $pokestop)
+        {
+            $this->pokestops[] = new Pokestop($this->pokemonGoAPI, $pokestop);
+        }
     }
 
     public function isComplete()
@@ -147,7 +153,7 @@ class MapObjects
         $this-> addSpawnPoints($other->getSpawnPoints());
 
 
-        foreach($other->getGyms() as $otherGym)
+       /* foreach($other->getGyms() as $otherGym)
         {
             foreach($this->getGyms() as $gym) {
                 if ($otherGym->getId() == ($gym->getId())) {
@@ -167,7 +173,7 @@ class MapObjects
                 }
             }
             $this->pokestops[] = $otherPokestop;
-        }
+        }*/
     }
 
     public function getCatchablePokemons()

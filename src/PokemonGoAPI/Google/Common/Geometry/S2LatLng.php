@@ -147,51 +147,58 @@ class S2LatLng {
     /**
      * Return the distance (measured along the surface of the sphere) to the given
      * point.
-     *#/
-     * public S1Angle getDistance(final S2LatLng o) {
-     * // This implements the Haversine formula, which is numerically stable for
-     * // small distances but only gets about 8 digits of precision for very large
-     * // distances (e.g. antipodal points). Note that 8 digits is still accurate
-     * // to within about 10cm for a sphere the size of the Earth.
-     * //
-     * // This could be fixed with another sin() and cos() below, but at that point
-     * // you might as well just convert both arguments to S2Points and compute the
-     * // distance that way (which gives about 15 digits of accuracy for all
-     * // distances).
-     *
-     * double lat1 = lat().radians();
-     * double lat2 = o.lat().radians();
-     * double lng1 = lng().radians();
-     * double lng2 = o.lng().radians();
-     * double dlat = Math.sin(0.5 * (lat2 - lat1));
-     * double dlng = Math.sin(0.5 * (lng2 - lng1));
-     * double x = dlat * dlat + dlng * dlng * Math.cos(lat1) * Math.cos(lat2);
-     * return S1Angle.radians(2 * Math.atan2(Math.sqrt(x), Math.sqrt(Math.max(0.0, 1.0 - x))));
-     * // Return the distance (measured along the surface of the sphere) to the
-     * // given S2LatLng. This is mathematically equivalent to:
-     * //
-     * // S1Angle::FromRadians(ToPoint().Angle(o.ToPoint())
-     * //
-     * // but this implementation is slightly more efficient.
-     * }
-     *
-     * /**
+     */
+    public function getDistance(S2LatLng $o)
+    {
+      // This implements the Haversine formula, which is numerically stable for
+      // small distances but only gets about 8 digits of precision for very large
+      // distances (e.g. antipodal points). Note that 8 digits is still accurate
+      // to within about 10cm for a sphere the size of the Earth.
+      //
+      // This could be fixed with another sin() and cos() below, but at that point
+      // you might as well just convert both arguments to S2Points and compute the
+      // distance that way (which gives about 15 digits of accuracy for all
+      // distances).
+
+      $lat1 = self::lat()->radians();
+      $lat2 = $o->lat()->radians();
+      $lng1 = self::lng()->radians();
+      $lng2 = $o->lng()->radians();
+      $dlat = sin(0.5 * ($lat2 - $lat1));
+      $dlng = sin(0.5 * ($lng2 - $lng1));
+      $x = $dlat * $dlat + $dlng * $dlng * cos($lat1) * cos($lat2);
+      return S1Angle::sradians(2 * atan2(sqrt($x), sqrt(max(0.0, 1.0 - $x))));
+      // Return the distance (measured along the surface of the sphere) to the
+      // given S2LatLng. This is mathematically equivalent to:
+      //
+      // S1Angle::FromRadians(ToPoint().Angle(o.ToPoint())
+      //
+      // but this implementation is slightly more efficient.
+      }
+
+    /**
      * Returns the surface distance to the given point assuming a constant radius.
-     *#/
-     * public double getDistance(final S2LatLng o, double radius) {
-     * // TODO(dbeaumont): Maybe check that radius >= 0 ?
-     * return getDistance(o).radians() * radius;
-     * }
-     *
-     * /**
+     */
+    public function getDistanceWithRadius(S2LatLng $o, $radius)
+    {
+        if($radius >= 0)
+        {
+            return $this->getDistance($o)->radians() * $radius;
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Returns the surface distance to the given point assuming the default Earth
      * radius of {@link #EARTH_RADIUS_METERS}.
-     *#/
-     * public double getEarthDistance(final S2LatLng o) {
-     * return getDistance(o, EARTH_RADIUS_METERS);
-     * }
-     *
-     * /**
+     */
+     public function getEarthDistance($o)
+        {
+        return $this->getDistanceWithRadius($o, self::EARTH_RADIUS_METERS);
+     }
+
+    /**
      * Adds the given point to this point.
      * Note that there is no guarantee that the new point will be <em>valid</em>.
      *#/

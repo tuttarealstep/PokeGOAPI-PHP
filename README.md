@@ -35,10 +35,10 @@ To:
     public $PK_GO_DEBUG = true;
  ```
 
-## LINKS
+## Links
   - [Examples](https://github.com/tuttarealstep/PokeGOAPI-PHP/tree/master/examples)
 
-## TODO
+## Todo
   - Implement PTC Login
   - Test all things
   - Check for issues
@@ -50,3 +50,6 @@ To:
 - [Grover-c13](https://github.com/Grover-c13) for his java api (Beacuse I've converted his api in php and for the inspiration)
 - [jaspervdm](https://github.com/jaspervdm/pogoprotos-php) for his protos
 - [NicklasWallgren](https://github.com/NicklasWallgren/PokemonGoAPI-PHP) because I've used for his updated protos
+
+## Legal
+This project is in no way affiliated with, maintained, sponsored, authorized by Niantic, The Pokémon Company, Nintendo or any of its affiliates or subsidiaries. This is an independent and unofficial API for educational use ONLY. Using the project might be against the terms of service.

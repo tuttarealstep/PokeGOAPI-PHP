@@ -21,67 +21,109 @@ class Gym
     private $GetGymDetailsResponse = null;
     private $pokemonGoAPI = null;
 
+    /**
+     * Gym constructor.
+     * @param PokemonGoAPI $pokemonGoAPI
+     * @param FortData $fortData
+     */
     function __construct(PokemonGoAPI $pokemonGoAPI, FortData $fortData)
     {
         $this->pokemonGoAPI = $pokemonGoAPI;
         $this->fortData = $fortData;
     }
 
+    /**
+     * @return string
+     */
     public function getId()
     {
         return $this->fortData->getId();
     }
 
+    /**
+     * @return int
+     */
     public function getLatitude()
     {
 		return $this->fortData->getLatitude();
 	}
 
+    /**
+     * @return int
+     */
 	public function getLongitude()
     {
 		return $this->fortData->getLongitude();
 	}
 
+    /**
+     * @return bool
+     */
 	public function getEnabled()
     {
 		return $this->fortData->getEnabled();
 	}
 
+    /**
+     * @return int
+     */
 	public function getOwnedByTeam()
     {
 		return $this->fortData->getOwnedByTeam();
 	}
 
+    /**
+     * @return int
+     */
 	public function getGuardPokemonId()
     {
 		return $this->fortData->getGuardPokemonId();
 	}
 
+    /**
+     * @return int
+     */
 	public function getGuardPokemonCp()
     {
 		return $this->fortData->getGuardPokemonCp();
 	}
 
+    /**
+     * @return int
+     */
 	public function getPoints()
     {
 		return $this->fortData->getGymPoints();
 	}
 
+    /**
+     * @return bool
+     */
 	public function getIsInBattle()
     {
 		return $this->fortData->getIsInBattle();
 	}
 
+    /**
+     * @return bool
+     */
 	public function isAttackable()
     {
         return (count($this->getGymMembers()) != 0);
     }
 
+    /**
+     * @param $team
+     * @return Battle
+     */
 	public function battle($team)
     {
         return new Battle($this->pokemonGoAPI, $team, $this);
     }
 
+    /**
+     * @return null|GetGymDetailsResponse
+     */
     private function details()
     {
         if ($this->GetGymDetailsResponse == null) {
@@ -101,36 +143,60 @@ class Gym
             return $this->GetGymDetailsResponse;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->details()->getName();
     }
 
+    /**
+     * @return array
+     */
 	public function getUrlsList()
     {
         return $this->details()->getUrlsArray();
     }
 
+    /**
+     * @return int
+     */
 	public function getResult()
     {
         return $this->details()->getResult();
     }
 
+    /**
+     * @return bool
+     */
 	public function inRange()
     {
         $result = $this->getResult();
 		return ( $result != GetGymDetailsResponse_Result::ERROR_NOT_IN_RANGE);
 	}
 
-	public function getDescription() {
+    /**
+     * @return string
+     */
+	public function getDescription()
+    {
         return $this->details()->getDescription();
     }
 
-	public function getGymMembers() {
+    /**
+     * @return mixed
+     */
+	public function getGymMembers()
+    {
         return $this->details()->getGymState()->getMembershipsArray();
     }
 
-	public function getDefendingPokemon() {
+    /**
+     * @return array
+     */
+	public function getDefendingPokemon()
+    {
         $data = [];
 
 		foreach ($this->getGymMembers() as $gymMember) {
@@ -140,7 +206,11 @@ class Gym
 		return $data;
 	}
 
-	protected function getApi() {
+    /**
+     * @return null|PokemonGoAPI
+     */
+	protected function getApi()
+    {
 		return $this->pokemonGoAPI;
 	}
 

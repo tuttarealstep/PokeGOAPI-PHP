@@ -32,6 +32,12 @@ class Battle
     private $concluded;
     private $outcome;
 
+    /**
+     * Battle constructor.
+     * @param PokemonGoAPI $pokemonGoAPI
+     * @param $team
+     * @param Gym $gym
+     */
     function __construct(PokemonGoAPI $pokemonGoAPI, $team, Gym $gym)
     {
         $this->team = $team;
@@ -44,6 +50,9 @@ class Battle
         }
     }
 
+    /**
+     * @return int
+     */
     public function start()
     {
         $builder = new StartGymBattleMessage();
@@ -75,6 +84,11 @@ class Battle
         return $battleResponse->getResult();
     }
 
+    /**
+     * @param $times
+     * @return AttackGymResponse
+     * @throws \Exception
+     */
     public function attack($times)
     {
         $actions = [];
@@ -94,6 +108,10 @@ class Battle
         return $result;
     }
 
+    /**
+     * @param Pokemon $pokemon
+     * @return BattlePokemonInfo
+     */
     private function createBattlePokemon(Pokemon $pokemon)
     {
         $info = new BattlePokemonInfo();
@@ -104,11 +122,18 @@ class Battle
         return $info;
     }
 
+    /**
+     * @param $index
+     * @return mixed
+     */
     private function getDefender($index)
     {
         return $this->gym->getGymMembers()[0]->getPokemonData();
     }
 
+    /**
+     * @return mixed
+     */
     private function getLastActionFromServer()
     {
         $actionCount = $this->battleResponse->getBattleLog()->getBattleActionsCount();
@@ -116,6 +141,9 @@ class Battle
         return $action;
     }
 
+    /**
+     * @return AttackGymResponse
+     */
     private function sendBlankAction()
     {
         $message = new AttackGymMessage();
@@ -130,6 +158,11 @@ class Battle
         return new AttackGymResponse($serverRequest->getData());
     }
 
+    /**
+     * @param $actions
+     * @return AttackGymResponse
+     * @throws \Exception
+     */
     private function doActions($actions)
     {
         $message = new AttackGymMessage();
@@ -165,11 +198,17 @@ class Battle
 
     }
 
+    /**
+     * @return mixed
+     */
     public function getConcluded()
     {
         return $this->concluded;
     }
 
+    /**
+     * @return mixed
+     */
     public function getOutcome()
     {
         return $this->outcome;

@@ -25,6 +25,8 @@ use PokemonGoAPI\Main\ServerRequest;
 
 class Map
 {
+    const CELL_WIDTH = 3;
+    const RESEND_REQUEST = 5000;
     private $pokemonGoAPI = null;
 
     private $useCache;
@@ -97,6 +99,17 @@ class Map
         }
 
 		return $gyms;
+    }
+
+    public function getPokestops()
+    {
+        $stops = [];
+        $objects = $this->getMapObjects();
+        foreach ($objects->getPokestops() as $fortdata) {
+            $stops[] = $fortdata;
+        }
+
+        return $stops;
     }
 
     public function getDecimatedSpawnPoints()
