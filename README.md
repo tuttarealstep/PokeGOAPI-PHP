@@ -1,6 +1,8 @@
 # PokeGOAPI-PHP
 Pokemon GO PHP API library
 
+[![Build Status](https://travis-ci.org/tuttarealstep/PokeGOAPI-PHP.svg?branch=master)](https://travis-ci.org/tuttarealstep/PokeGOAPI-PHP)
+
 This is a conversion of this: [PokeGOAPI-Java](https://github.com/Grover-c13/PokeGOAPI-Java) in php.
 
 # Build
