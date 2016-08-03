@@ -6,7 +6,7 @@
  */
 
 
-require realpath(__DIR__) . '/../vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use PokemonGoAPI\Api\PokemonGoAPI;
 
@@ -15,7 +15,7 @@ class GoogleLoginExample
     public function run()
     {
         $PokemonGoAPILogin = (new \PokemonGoAPI\Auth\GoogleLogin())->login('test@gmail.com', 'password');
-        $PokemonGoAPI = new PokemonGoAPI($PokemonGoAPILogin);
+        $PokemonGoAPI      = new PokemonGoAPI($PokemonGoAPILogin);
         $PokemonGoAPI->getOutput()->setPKGODEBUG(true);
         $PokemonGoAPI->getOutput()->write($PokemonGoAPI->getPlayerProfile()->getUsername());
     }
