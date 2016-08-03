@@ -15,6 +15,7 @@ use POGOProtos\Networking\Responses\FortDetailsResponse;
 use POGOProtos\Networking\Responses\GetMapObjectsResponse;
 use PokemonGoAPI\Api\Gym\Gym;
 use PokemonGoAPI\Api\Map\Fort\FortDetails;
+use PokemonGoAPI\Api\Map\Fort\Pokestop;
 use PokemonGoAPI\Api\Map\Pokemon\CatchablePokemon;
 use PokemonGoAPI\Api\Map\Pokemon\NearbyPokemon;
 use PokemonGoAPI\Api\PokemonGoAPI;
@@ -23,18 +24,44 @@ use PokemonGoAPI\Google\Common\Geometry\S2CellId;
 use PokemonGoAPI\Google\Common\Geometry\S2LatLng;
 use PokemonGoAPI\Main\ServerRequest;
 
+/**
+ * Class Map
+ * @package PokemonGoAPI\Api\Map
+ */
 class Map
 {
     const CELL_WIDTH = 3;
     const RESEND_REQUEST = 5000;
+
+    /**
+     * @var null|PokemonGoAPI
+     */
     private $pokemonGoAPI = null;
 
+    /**
+     * @var bool
+     */
     private $useCache;
+
+    /**
+     * @var MapObjects
+     */
     private $cachedMapObjects;
+
+    /**
+     * @var
+     */
     private $mapObjectsExpiry;
 
+    /**
+     * @var int
+     */
     private $lastMapUpdate;
 
+    /**
+     * Map constructor.
+     * @param PokemonGoAPI $pokemonGoAPI
+     */
     function __construct(PokemonGoAPI $pokemonGoAPI)
     {
         $this->pokemonGoAPI = $pokemonGoAPI;
@@ -43,11 +70,15 @@ class Map
         $this->useCache = true;
     }
 
+
     public function clearCache() {
         $this->lastMapUpdate = 0;
         $this->cachedMapObjects = new MapObjects($this->pokemonGoAPI);
     }
 
+    /**
+     * @return CatchablePokemon[]
+     */
     public function getCatchablePokemon()
     {
         $catchablePokemons = [];
@@ -66,6 +97,9 @@ class Map
         return $catchablePokemons;
     }
 
+    /**
+     * @return NearbyPokemon[]
+     */
     public function getNearbyPokemon()
     {
         $pokemons = [];
@@ -78,6 +112,9 @@ class Map
 		return $pokemons;
     }
 
+    /**
+     * @return Point[]
+     */
     public function getSpawnPoints()
     {
         $points = [];
@@ -90,6 +127,9 @@ class Map
 		return $points;
     }
 
+    /**
+     * @return Gym[]
+     */
     public function getGyms()
     {
         $gyms = [];
@@ -101,6 +141,9 @@ class Map
 		return $gyms;
     }
 
+    /**
+     * @return Pokestop[]
+     */
     public function getPokestops()
     {
         $stops = [];
@@ -112,6 +155,9 @@ class Map
         return $stops;
     }
 
+    /**
+     * @return Point
+     */
     public function getDecimatedSpawnPoints()
     {
         $points = [];
@@ -124,11 +170,22 @@ class Map
         return $points;
     }
 
+    /**
+     * @param int $width
+     * @return MapObjects
+     */
     public function getMapObjects($width = 9)
     {
         return $this->getMapObjectsCells($this->getCellIds($this->pokemonGoAPI->getLatitude(), $this->pokemonGoAPI->getLongitude(), $width), $this->pokemonGoAPI->getLatitude(), $this->pokemonGoAPI->getLongitude(), $this->pokemonGoAPI->getAltitude());
     }
 
+    /**
+     * @param $cellIds
+     * @param $latitude
+     * @param $longitude
+     * @param $altitude
+     * @return MapObjects
+     */
     public function getMapObjectsCells($cellIds, $latitude, $longitude, $altitude)
     {
         $this->pokemonGoAPI->setLatitude((float) $latitude);
@@ -183,6 +240,12 @@ class Map
 		return $result;
     }
 
+    /**
+     * @param $latitude
+     * @param $longitude
+     * @param $width
+     * @return array
+     */
     public function getCellIds( $latitude, $longitude, $width)
     {
         $latLng = S2LatLng::fromDegrees($latitude, $longitude);
@@ -207,6 +270,12 @@ class Map
 		return $cells;
     }
 
+    /**
+     * @param $id
+     * @param $lon
+     * @param $lat
+     * @return FortDetails
+     */
     public function getFortDetails($id, $lon, $lat)
     {
         $reqMsg = new FortDetailsMessage();
@@ -221,21 +290,33 @@ class Map
 		return new FortDetails($response);
     }
 
+    /**
+     * @return MapObjects
+     */
     public function getCachedMapObjects()
     {
         return $this->cachedMapObjects;
     }
 
+    /**
+     * @return mixed
+     */
     public function getMapObjectsExpiry()
     {
         return $this->mapObjectsExpiry;
     }
 
+    /**
+     * @param $cachedMapObjects
+     */
     public function setCachedMapObjects($cachedMapObjects)
     {
         $this->cachedMapObjects = $cachedMapObjects;
     }
 
+    /**
+     * @param $mapObjectsExpiry
+     */
     public function setMapObjectsExpiry($mapObjectsExpiry)
     {
         $this->mapObjectsExpiry = $mapObjectsExpiry;
