@@ -5,24 +5,25 @@
  * Time: 19.14
  */
 
-require realpath(__DIR__) . '/../vendor/autoload.php';
+require '../vendor/autoload.php';
+require 'BaseExample.php';
 
-use PokemonGoAPI\Api\PokemonGoAPI;
-
-class GetCatchablePokemonInAreaExample
+class GetCatchablePokemonInAreaExample extends BaseExample
 {
     public function run()
     {
-        $PokemonGoAPILogin = (new \PokemonGoAPI\Auth\GoogleLogin())->login('test@gmail.com', 'password');
-        $PokemonGoAPI = new PokemonGoAPI($PokemonGoAPILogin);
-        $PokemonGoAPI->getOutput()->setPKGODEBUG(true);
+        $this->api->getOutput()->write("Hello " . $this->api->getPlayerProfile()->getUsername());
 
-        $PokemonGoAPI->getOutput()->write("Hello " . $PokemonGoAPI->getPlayerProfile()->getUsername());
+        $map = $this->api->getMap();
 
-        $map = $PokemonGoAPI->getMap();
-        //var_dump($map->getCatchablePokemon());
+        $pokemons = $map->getCatchablePokemon();
+        $this->api->getOutput()->write("Pokemon in area:  " . count($pokemons));
 
-        $PokemonGoAPI->getOutput()->write("Pokemon in area:  " . count($map->getCatchablePokemon()));
+        foreach ($pokemons as $id => $pokemon) {
+            $msg = sprintf('%s pokemon located at %s, %s', $pokemon->getPokemonName(), $pokemon->getLatitude(),
+                $pokemon->getLongitude());
+            $this->api->getOutput()->write($msg);
+        }
     }
 }
 

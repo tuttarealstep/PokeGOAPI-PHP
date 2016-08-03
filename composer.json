@@ -10,7 +10,8 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "guzzlehttp/guzzle": "~6.0"
+    "guzzlehttp/guzzle": "~6.0",
+    "vlucas/phpdotenv": "^2.3"
   },
   "reqire-dev":{
     "phpunit/phpunit": "^4.8|^5.0"

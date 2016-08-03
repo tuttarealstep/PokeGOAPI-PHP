@@ -48,3 +48,5 @@ fabric.properties
 vendor
 .idea
 tests
+/examples/.token
+examples/.env

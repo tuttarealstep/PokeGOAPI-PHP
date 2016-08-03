@@ -21,6 +21,8 @@ How to use example:
   
   $PokemonGoAPILogin = (new \PokemonGoAPI\Auth\GoogleLogin())->login('username', 'password'); //Use Google for login and retrive token
   
+  $PokemonGoAPILogin = (new \PokemonGoAPI\Auth\GoogleLogin())->loginWithGoogleToken($token); //or use existing token
+  
   $PokemonGoAPI = new PokemonGoAPI($PokemonGoAPILogin); //Send token to the api
   
   echo $PokemonGoAPI->getPlayerProfile()->getUsername() . "\n"; //Print User Username

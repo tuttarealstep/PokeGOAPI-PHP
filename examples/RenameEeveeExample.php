@@ -5,32 +5,31 @@
  * Time: 19.14
  */
 
-require realpath(__DIR__) . '/../vendor/autoload.php';
+require '../vendor/autoload.php';
+require  'BaseExample.php';
 
 use PokemonGoAPI\Api\PokemonGoAPI;
 use PokemonGoAPI\Auth\GoogleLogin;
 
-class RenameEeveeExample
+class RenameEeveeExample extends BaseExample
 {
     public function run()
     {
-        $PokemonGoAPILogin = (new GoogleLogin())->login('test@gmail.com', 'password');
-        $PokemonGoAPI = new PokemonGoAPI($PokemonGoAPILogin);
-        $PokemonGoAPI->getOutput()->setPKGODEBUG(true);
+        $eevees = $this->api
+            ->getInventories()
+            ->getPokeBank()
+            ->getPokemonByPokemonId(\POGOProtos\Enums\PokemonId::STARYU);
 
-        $eevees = $PokemonGoAPI->getInventories()->getPokeBank()->getPokemonByPokemonId(\POGOProtos\Enums\PokemonId::EEVEE);
-
-        $PokemonGoAPI->getOutput()->write("Hello " . $PokemonGoAPI->getPlayerProfile()->getUsername());
+        $this->api->getOutput()->write("Hello " . $this->api->getPlayerProfile()->getUsername());
 
         $eeveesCount = count($eevees);
 
-        if($eeveesCount > 0)
-        {
-            $eevees = array_values($eevees);
-            $eevees[0]->renamePokemon("FooBar");
-            $PokemonGoAPI->getOutput()->write("You have renamed Eevee!");
+        if ($eeveesCount > 0) {
+            $pokemon = current($eevees);
+            $pokemon->renamePokemon("FooBar");
+            $this->api->getOutput()->write("You have renamed Eevee!");
         } else {
-            $PokemonGoAPI->getOutput()->write("You have no Eevee!");
+            $this->api->getOutput()->write("You have no Eevee!");
         }
     }
 }
