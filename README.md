@@ -35,6 +35,8 @@ To:
     public $PK_GO_DEBUG = true;
  ```
 
+## Problems
+- If you get NeedsBrowser error go to this link: [DisplayUnlockCaptcha](https://accounts.google.com/b/0/DisplayUnlockCaptcha) and proceed to Unlock captcha.
 ## Links
   - [Examples](https://github.com/tuttarealstep/PokeGOAPI-PHP/tree/master/examples)
 
