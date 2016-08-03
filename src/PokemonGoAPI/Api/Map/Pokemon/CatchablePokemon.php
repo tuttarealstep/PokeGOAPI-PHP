@@ -20,8 +20,6 @@ use POGOProtos\Networking\Responses\EncounterResponse;
 use POGOProtos\Networking\Responses\EncounterResponse_Status;
 use POGOProtos\Networking\Responses\UseItemCaptureResponse;
 use PokemonGoAPI\Api\Inventory\Pokeball;
-use PokemonGoAPI\Api\Map\Pokemon\CatchItemResult;
-use PokemonGoAPI\Api\Map\Pokemon\EncounterResult;
 use PokemonGoAPI\Api\PokemonGoAPI;
 use PokemonGoAPI\Main\ServerRequest;
 
@@ -93,41 +91,35 @@ class CatchablePokemon
 
     public function catchPokemonWithRazzBerry()
     {
-        $pokeball = null;
+        $this->useItem(ItemId::ITEM_RAZZ_BERRY);
+        return $this->catchPokemonWithPokeballAndAmountAndRazberryLimit($this->getAvaiblePokeball(), -1, -1);
+    }
 
+    /**
+     * @return int
+     * @throws \Exception
+     */
+    private function getAvaiblePokeball(){
         $bag = $this->pokemonGoAPI->getInventories()->getItemBag();
 
-        if (count($bag->getItem(ItemId::ITEM_POKE_BALL)) > 0) {
+        if ($bag->getItem(ItemId::ITEM_POKE_BALL)->getCount() > 0) {
             $pokeball = Pokeball::POKEBALL;
-        } else if (count($bag->getItem(ItemId::ITEM_GREAT_BALL)) > 0) {
+        } elseif ($bag->getItem(ItemId::ITEM_GREAT_BALL)->getCount() > 0) {
             $pokeball = Pokeball::GREATBALL;
-        } else if (count($bag->getItem(ItemId::ITEM_ULTRA_BALL)) > 0) {
+        } elseif ($bag->getItem(ItemId::ITEM_ULTRA_BALL)->getCount() > 0) {
             $pokeball = Pokeball::ULTRABALL;
-        } else {
+        } elseif ($bag->getItem(ItemId::ITEM_ULTRA_BALL)->getCount() > 0) {
             $pokeball = Pokeball::MASTERBALL;
+        } else {
+            throw new \Exception('Not enough pokeball in bag');
         }
 
-        $this->useItem(ItemId::ITEM_RAZZ_BERRY);
-        return $this->catchPokemonWithPokeballAndAmountAndRazberryLimit($pokeball, -1, -1);
+        return $pokeball;
     }
 
     public function catchPokemon()
     {
-        $pokeball = null;
-
-        $bag = $this->pokemonGoAPI->getInventories()->getItemBag();
-
-        if (count($bag->getItem(ItemId::ITEM_POKE_BALL)) > 0) {
-            $pokeball = Pokeball::POKEBALL;
-        } else if (count($bag->getItem(ItemId::ITEM_GREAT_BALL)) > 0) {
-            $pokeball = Pokeball::GREATBALL;
-        } else if (count($bag->getItem(ItemId::ITEM_ULTRA_BALL)) > 0) {
-            $pokeball = Pokeball::ULTRABALL;
-        } else {
-            $pokeball = Pokeball::MASTERBALL;
-        }
-
-        return $this->catchPokemonWithPokeballType($pokeball);
+        return $this->catchPokemonWithPokeballType($this->getAvaiblePokeball());
     }
 
     public function catchPokemonWithPokeballType($pokeball)
