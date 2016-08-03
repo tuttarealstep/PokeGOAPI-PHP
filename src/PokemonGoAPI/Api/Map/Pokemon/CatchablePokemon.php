@@ -7,6 +7,7 @@
 
 namespace PokemonGoAPI\Api\Map\Pokemon;
 
+use POGOProtos\Enums\PokemonId;
 use POGOProtos\Inventory\Item\ItemId;
 use POGOProtos\Map\Pokemon\MapPokemon;
 use POGOProtos\Map\Pokemon\WildPokemon;
@@ -243,5 +244,13 @@ class CatchablePokemon
     public function isEncountered()
     {
         return $this->encountered;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPokemonName()
+    {
+        return PokemonId::toString($this->pokemonId);
     }
 }

@@ -86,13 +86,15 @@ class Map
 
         foreach($objects->getCatchablePokemons() as $mapPokemon)
         {
-            $catchablePokemons[] = new CatchablePokemon($this->pokemonGoAPI, $mapPokemon);
+            $catchablePokemons[$mapPokemon->getEncounterId()] = new CatchablePokemon($this->pokemonGoAPI, $mapPokemon);
         }
 
         foreach($objects->getWildPokemons() as $wildPokemon)
         {
-            $catchablePokemons[] = new CatchablePokemon($this->pokemonGoAPI, null, $wildPokemon);
+            $catchablePokemons[$wildPokemon->getEncounterId()] = new CatchablePokemon($this->pokemonGoAPI, null, $wildPokemon);
         }
+
+
 
         return $catchablePokemons;
     }

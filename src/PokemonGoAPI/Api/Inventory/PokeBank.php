@@ -32,7 +32,7 @@ class PokeBank
     function reset(PokemonGoAPI $PokemonGoAPI)
     {
         $this->PokemonGoAPI = $PokemonGoAPI;
-        $this->pokemons = [];
+        $this->pokemons     = [];
     }
 
     /**
@@ -42,33 +42,20 @@ class PokeBank
      */
     public function addPokemon(Pokemon $pokemon)
     {
-        $alreadyAdded = array_filter($this->pokemons, function($testPokemon) use ($pokemon)
-        {
-            return ($pokemon->getId() == $testPokemon->getId());
-        });
-
-        if(count($alreadyAdded) < 1)
-        {
-            $this->pokemons[] = $pokemon;
-        }
+        $this->pokemons[$pokemon->getId()] = $pokemon;
     }
 
     /**
      * Search a pokemon by its pokemonid
      *
      * @param $id
-     * @return array
+     * @return Pokemon[]
      */
     public function getPokemonByPokemonId($id)
     {
-       return array_filter($this->pokemons, function($testPokemon) use ($id)
-        {
-            if($testPokemon->getPokemonId() == $id)
-            {
-                return true;
-            }
-
-            return false;
+        return array_filter($this->pokemons, function ($testPokemon) use ($id) {
+            /** @var $testPokemon Pokemon */
+            return $testPokemon->getPokemonId() == $id;
         });
     }
 
@@ -76,18 +63,13 @@ class PokeBank
      * Remove pokemon
      *
      * @param $pokemon
-     * @return array
+     * @return Pokemon[]
      */
     public function removePokemon($pokemon)
     {
-        return array_filter($this->pokemons, function($testPokemon) use ($pokemon)
-        {
-            if($testPokemon->getId() != $pokemon->getId())
-            {
-                return true;
-            }
-
-            return false;
+        return array_filter($this->pokemons, function ($testPokemon) use ($pokemon) {
+            /** @var $testPokemon Pokemon */
+            return ($testPokemon->getId() != $pokemon->getId());
         });
     }
 
@@ -95,18 +77,10 @@ class PokeBank
      * Return a pokemon by its id
      *
      * @param $id
-     * @return null
+     * @return null|Pokemon
      */
     public function getPokemonById($id)
     {
-        foreach($this->pokemons as $pokemon)
-        {
-            if($pokemon->getId() == $id)
-            {
-                return $pokemon;
-            }
-        }
-
-        return null;
+        return array_key_exists($id, $this->pokemons) ? $this->pokemons[$id] : null;
     }
 }
