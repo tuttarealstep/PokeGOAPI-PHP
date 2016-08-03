@@ -104,6 +104,16 @@ class GoogleLogin extends Login
             return false;
         }
 
-        return ["Auth" => $googleOAuthLogin['Auth'], "Provider" => "google"];
+        return $this->loginWithGoogleToken($googleOAuthLogin['Auth']);
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return array
+     */
+    public function loginWithGoogleToken($token)
+    {
+        return ["Auth" => $token, "Provider" => "google"];
     }
 }
